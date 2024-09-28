@@ -1,0 +1,20 @@
+WFH_Count = SWITCH(TRUE() ,
+Final_Data[Value] = "WFH" , 1 ,
+Final_Data[Value] = "HWFH" ,0.5,
+0)
+
+Month = STARTOFMONTH(Final_Data[Date])
+
+Present_Days = 
+Var presentdays = CALCULATE(COUNT(Final_Data[Value]),Final_Data[Value]="P")
+return 
+presentdays+[WFH_Count]
+
+
+
+Total_Working_Days = 
+VAR totaldays = COUNT(Final_Data[Value])
+VAR nonworkdays = CALCULATE(COUNT('Final_Data'[Value]),Final_Data[Value] in {"WO","HO"})
+
+RETURN
+totaldays - nonworkdays
